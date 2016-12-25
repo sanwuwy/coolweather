@@ -1,4 +1,4 @@
-package com.coolweather.android.fragment;
+package com.coolweather.anxy.fragment;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -15,14 +15,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.coolweather.android.MainActivity;
-import com.coolweather.android.R;
-import com.coolweather.android.WeatherActivity;
-import com.coolweather.android.db.City;
-import com.coolweather.android.db.County;
-import com.coolweather.android.db.Province;
-import com.coolweather.android.util.HttpUtil;
-import com.coolweather.android.util.Utility;
+import com.coolweather.anxy.MainActivity;
+import com.coolweather.anxy.R;
+import com.coolweather.anxy.WeatherActivity;
+import com.coolweather.anxy.db.City;
+import com.coolweather.anxy.db.County;
+import com.coolweather.anxy.db.Province;
+import com.coolweather.anxy.util.HttpUtil;
+import com.coolweather.anxy.util.Utility;
 
 import org.litepal.crud.DataSupport;
 

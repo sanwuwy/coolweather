@@ -1,4 +1,4 @@
-package com.coolweather.android.service;
+package com.coolweather.anxy.service;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -10,9 +10,9 @@ import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 
-import com.coolweather.android.gson.Weather;
-import com.coolweather.android.util.HttpUtil;
-import com.coolweather.android.util.Utility;
+import com.coolweather.anxy.gson.Weather;
+import com.coolweather.anxy.util.HttpUtil;
+import com.coolweather.anxy.util.Utility;
 
 import java.io.IOException;
 
