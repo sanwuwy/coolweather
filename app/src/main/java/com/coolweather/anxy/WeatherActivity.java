@@ -26,6 +26,7 @@ import com.coolweather.anxy.gson.Weather;
 import com.coolweather.anxy.service.AutoUpdateService;
 import com.coolweather.anxy.util.HttpUtil;
 import com.coolweather.anxy.util.Utility;
+import com.umeng.analytics.MobclickAgent;
 
 import java.io.IOException;
 
@@ -218,5 +219,17 @@ public class WeatherActivity extends AppCompatActivity {
         carWashText.setText(carWash);
         sportText.setText(sport);
         weatherLayout.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }
