@@ -26,6 +26,7 @@ import com.coolweather.anxy.gson.Weather;
 import com.coolweather.anxy.service.AutoUpdateService;
 import com.coolweather.anxy.util.HttpUtil;
 import com.coolweather.anxy.util.Utility;
+import com.tencent.bugly.crashreport.BuglyLog;
 import com.umeng.analytics.MobclickAgent;
 
 import java.io.IOException;
@@ -39,6 +40,8 @@ import okhttp3.Response;
  */
 
 public class WeatherActivity extends AppCompatActivity {
+
+    private static final String TAG = "WeatherActivity";
 
     private ScrollView weatherLayout;
 
@@ -122,6 +125,12 @@ public class WeatherActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void reportError(View view) {
+        BuglyLog.v(TAG, "use for test at 129");
+        int i = 5 / 0;
+        BuglyLog.v(TAG, "use for test at 130");
     }
 
     private void loadBingPic() {

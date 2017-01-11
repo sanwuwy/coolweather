@@ -1,18 +1,32 @@
 apply plugin: 'com.android.application'
+apply plugin: 'bugly'
+
+bugly {
+    appId = 'be9994f2bd' // 注册时分配的App ID
+    appKey = '8ae2cb22-3eb4-4fa9-8210-6a14967c7fd6' // 注册时分配的App Key
+}
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.3"
+    compileSdkVersion 23
+    buildToolsVersion '23.0.3'
     defaultConfig {
         manifestPlaceholders.put("UMENG_CHANNEL_VALUE", 'dev')
-        applicationId "com.coolweather.android"
+        applicationId "com.coolweather.anxy"
         minSdkVersion 16
-        targetSdkVersion 24
-        versionCode 1
-        versionName "1.1"
+        targetSdkVersion 23
+        versionCode 3
+        versionName "1.2"
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi-v7a', 'armeabi-v8a'
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64', 'armeabi'
+        }
     }
     signingConfigs {
-        config {
+        debug {
+
+        }
+        release {
             storeFile file(KEY_PATH)
             storePassword KEY_PASS
             keyAlias ALIAS_NAME
@@ -20,10 +34,22 @@ android {
         }
     }
     buildTypes {
-        release {
+        debug {
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+
+            versionNameSuffix "-debug"
             minifyEnabled false  //是否启动混淆
+            zipAlignEnabled false
+            shrinkResources false
+            signingConfig signingConfigs.debug
+        }
+        release {
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+            minifyEnabled true  //是否启动混淆
+            zipAlignEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.config
+            signingConfig signingConfigs.release
             applicationVariants.all { variant ->
                 if (variant.buildType.name.equals('release')) {
                     variant.outputs.each { output ->
@@ -38,6 +64,9 @@ android {
         }
     }
     productFlavors {
+        normal {
+            applicationId "com.coolweather.anxy"
+        }
         qihoo {
             applicationId "com.coolweather.anxy.qihoo"
         }
@@ -53,13 +82,17 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.android.support:appcompat-v7:23.2.1'
     testCompile 'junit:junit:4.12'
     compile "org.litepal.android:core:1.4.1"
     compile 'com.squareup.okhttp3:okhttp:3.5.0'
     compile 'com.google.code.gson:gson:2.8.0'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.umeng.analytics:analytics:latest.integration'
+
+    compile 'com.tencent.bugly:crashreport_upgrade:latest.release'//其中latest.release指代最新版本号，也可以指定明确的版本号，例如1.2.0
+    compile 'com.tencent.bugly:nativecrashreport:latest.release' //其中latest.release指代最新版本号，也可以指定明确的版本号，例如2.2.0
+
 }
 
 
